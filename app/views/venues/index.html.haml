@@ -1,0 +1,38 @@
+%table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        Name
+      %th
+        Address
+      %th
+        Address2
+      %th
+        City
+      %th
+        State
+      %th
+        Zipcode
+      %th
+        Phone Number
+      %th
+        Actions
+  %tbody
+    - @venues.each do |venue|
+      %tr
+        %td
+          = venue.name
+        %td
+          = venue.address
+        %td
+          = venue.address2
+        %td
+          = venue.city
+        %td
+          = venue.state
+        %td
+          = venue.zipcode
+        %td
+          = venue.phone_number
+        %td
+
