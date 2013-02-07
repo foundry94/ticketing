@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  layout :signed_in_layout
   before_filter :authenticate_user!
 
   def index
@@ -32,13 +31,4 @@ class UsersController < ApplicationController
     end
   end
 
-  private 
-
-  def signed_in_layout
-    if user_signed_in?
-      "signed_in"
-    else
-      "application"
-    end
-  end
 end
