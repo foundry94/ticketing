@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout :signed_in_layout
   before_filter :authenticate_user!
 
   def index
@@ -28,6 +29,16 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "User deleted."
     else
       redirect_to users_path, :notice => "Can't delete yourself."
+    end
+  end
+
+  private 
+
+  def signed_in_layout
+    if user_signed_in?
+      "signed_in"
+    else
+      "application"
     end
   end
 end
