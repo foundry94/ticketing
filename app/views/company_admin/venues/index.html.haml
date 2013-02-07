@@ -1,0 +1,41 @@
+.row
+  .span12
+    = link_to "New Venue", new_company_admin_venue_url, :class => 'btn pull-right'
+.row
+  .span8
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+            Name
+          %th
+            Address
+          %th
+            City
+          %th
+            State
+          %th
+            Zipcode
+          %th
+            Phone Number
+          %th
+            Actions
+      %tbody
+        - @venues.each do |venue|
+          %tr
+            %td
+              = venue.name
+            %td
+              = venue.formatted_address
+            %td
+              = venue.city
+            %td
+              = venue.state
+            %td
+              = venue.zipcode
+            %td
+              = venue.phone_number
+            %td
+              = link_to "Edit", edit_company_admin_venue_url(venue)
+              = link_to "Delete", company_admin_venue_url(venue), :method => :delete
+

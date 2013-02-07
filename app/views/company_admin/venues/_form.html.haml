@@ -1,0 +1,18 @@
+-if @venue.errors.any?
+  .alert.alert-error
+    %p
+      = pluralize(@venue.errors.count, "error")
+      prohibited this venue from being saved
+    - @venue.errors.full_messages.each do |msg|
+      %li= msg
+
+= simple_form_for(["company_admin", @venue]) do |f|
+  = f.input :name
+  = f.input :address
+  = f.input :address2
+  = f.input :city
+  = f.input :state
+  = f.input :zipcode
+  = f.input :phone_number
+  = f.input :user_id, :as => :hidden, :input_html => {:value => current_user.id}
+  = f.button :submit, :class => 'btn btn-primary'
