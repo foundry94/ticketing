@@ -1,12 +1,10 @@
-%table.table-striped.table-bordered
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %th
         Name
       %th
         Address
-      %th
-        Address2
       %th
         City
       %th
@@ -15,17 +13,13 @@
         Zipcode
       %th
         Phone Number
-      %th
-        Actions
   %tbody
     - @venues.each do |venue|
       %tr
         %td
-          = venue.name
+          = link_to venue.name, venue_url(venue)
         %td
-          = venue.address
-        %td
-          = venue.address2
+          = venue.formatted_address
         %td
           = venue.city
         %td
@@ -34,5 +28,4 @@
           = venue.zipcode
         %td
           = venue.phone_number
-        %td
 
