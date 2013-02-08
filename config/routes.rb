@@ -13,6 +13,7 @@ Ticketing::Application.routes.draw do
 
   namespace :company_admin do
     resources :venues, :except => [:show]
+    resources :events, :except => [:show]
   end
 
 end

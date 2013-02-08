@@ -1,0 +1,13 @@
+-if @event.errors.any?
+  .alert.alert-error
+    %p
+      = pluralize(@event.errors.count, "error")
+      prohibited this event from being saved
+    - @event.errors.full_messages.each do |msg|
+      %li= msg
+
+= simple_form_for(["company_admin", @event]) do |f|
+  = f.association :venue, :collection => @venues, :include_blank => false
+  = f.input :name
+  = f.input :price, :hint => 'prices should be in USD'
+  = f.button :submit, :class => 'btn btn-primary'

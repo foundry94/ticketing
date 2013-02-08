@@ -1,0 +1,29 @@
+.row
+  .span12
+    = link_to "New Event", new_company_admin_event_url, :class => 'btn pull-right'
+.row
+  .span10
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+            Venue
+          %th
+            Event Name
+          %th
+            Price
+          %th
+            Actions
+      %tbody
+        - @events.each do |event|
+          %tr
+            %td
+              = event.venue.name
+            %td
+              = event.name
+            %td
+              = number_to_currency(event.price)
+            %td
+              = link_to "Edit", edit_company_admin_event_url(event), :class => 'btn'
+              = link_to "Delete", company_admin_event_url(event), :method => :delete, :class => 'btn btn-danger', :confirm => 'Are you sure you want to delete? This action can not be undone.'
+
