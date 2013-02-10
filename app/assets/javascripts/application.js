@@ -14,3 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+$(document).ready(
+  function() {
+    $('#schedule_start_date').datepicker();
+  }
+);

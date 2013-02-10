@@ -10,6 +10,7 @@ Ticketing::Application.routes.draw do
   devise_for :users
   resources :users
   resources :venues
+  resources :events
 
   namespace :company_admin do
     resources :venues, :except => [:show]

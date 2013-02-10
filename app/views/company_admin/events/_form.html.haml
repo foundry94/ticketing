@@ -10,4 +10,52 @@
   = f.association :venue, :collection => @venues, :include_blank => false
   = f.input :name
   = f.input :price, :hint => 'prices should be in USD'
+
+  %h3
+    Schedule
+  %label
+    Date
+  = text_field_tag 'schedule[start_date]', @event.schedule.start_time.strftime('%m/%d/%Y'), :placeholder => 'Event Date'
+  %label
+    Start Time
+  = select_tag 'schedule[start_time]', options_for_select(TIME_OPTIONS, (@event.schedule.start_time.strftime('%I:%M %P') == Time.now().strftime('%I:%M %P')) ? '08:00 pm' : @event.schedule.start_time.strftime('%I:%M %P'))
+  %label
+    End Time
+  = select_tag 'schedule[end_time]', options_for_select(TIME_OPTIONS,  @event.schedule.end_time.nil? ? '10:00 pm' : @event.schedule.end_time.strftime('%I:%M %P'))
+  %label.checkbox
+    = check_box_tag 'schedule[repeats][is_checked]', 1, @event.schedule.rrules.empty? ? false : true, :id => 'schedule-repeat'
+    Repeats
+  .schedule-repeats-section
+    #schedule-repeats-type
+      = select_tag 'schedule[repeats][type]', options_for_select(REPEAT_TYPE_OPTIONS, (@event.schedule.to_s.include? "Weekly") ? "Weekly" : ""), :id => 'repeat-type'
+    #schedule-repeats-weekly
+      - DAYS_OF_WEEK.each do |day|
+        = check_box_tag 'schedule[repeats][days][]', day[0], (@event.schedule.to_s.include? day[1]) ? true : false
+        = day[1]
+
   = f.button :submit, :class => 'btn btn-primary'
+
+:javascript
+  $(function() {
+    if ($('#schedule-repeat').is(':checked')) {
+      $('.schedule-repeats-section').show();
+      if ($('#repeat-type option:selected').text() == 'Weekly') {
+        $('#schedule-repeats-weekly').show();
+      }
+    }
+  });
+  $('#schedule-repeat').click(function() {
+    if ($(this).is(':checked')){
+        $(".schedule-repeats-section").show();
+    }else{
+        $(".schedule-repeats-section").hide();
+    }
+  });
+
+  $('#repeat-type').change(function() {
+    if ($('#repeat-type option:selected').text() == 'Weekly') {
+      $('#schedule-repeats-weekly').show();
+    }else{
+      $('#schedule-repeats-weekly').hide();
+    }
+  });

@@ -17,3 +17,12 @@
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
 }
+
+.schedule-repeats-section {
+  display: none;
+  #schedule-repeats-type {
+  }
+  #schedule-repeats-weekly {
+    display: none;
+  }
+}

@@ -22,8 +22,11 @@ module CompanyAdmin
 
     def create
       @event = Event.new(params[:event])
-      
+
+      @event.set_schedule(params['schedule'])
+
       if @event.save
+        puts @event.schedule
         flash[:notice] = 'Event has been saved'
         redirect_to company_admin_events_url
       else
@@ -33,6 +36,8 @@ module CompanyAdmin
 
     def update
       @event = Event.find(params[:id])
+      
+      @event.set_schedule(params['schedule'])
 
       if @event.update_attributes(params[:event])
         flash[:notice] = 'Event has been updated'
